@@ -1,0 +1,77 @@
+{
+  "wedding": {
+    "label": "Wedding",
+    "gaps": [
+      {
+        "name": "Spouse Health Cover",
+        "estimatedPremium": "₹450/month",
+        "whyNow": "Marriage means shared healthcare needs. Adding your spouse to a health plan prevents one person's medical emergency from becoming a joint financial crisis."
+      },
+      {
+        "name": "Term Life Top-up",
+        "estimatedPremium": "₹280/month",
+        "whyNow": "With a spouse now financially connected to you, your existing life cover may no longer be sufficient to protect both of you."
+      },
+      {
+        "name": "Joint Savings Plan",
+        "estimatedPremium": "₹600/month",
+        "whyNow": "Starting a household together brings shared expenses. A joint savings plan helps build a financial buffer for your new life."
+      }
+    ]
+  },
+  "new_baby": {
+    "label": "New Baby",
+    "gaps": [
+      {
+        "name": "Child Health Rider",
+        "estimatedPremium": "₹350/month",
+        "whyNow": "Newborns and young children need frequent medical attention. A dedicated child health rider covers paediatric care without eating into your main policy."
+      },
+      {
+        "name": "Education Savings Plan",
+        "estimatedPremium": "₹1,200/month",
+        "whyNow": "Education costs rise faster than inflation. Starting early gives compounding time to build a meaningful education fund."
+      },
+      {
+        "name": "Term Life Increase",
+        "estimatedPremium": "₹320/month",
+        "whyNow": "A new dependent means your existing life cover needs to stretch further — enough to support your child for 20+ years if needed."
+      }
+    ]
+  },
+  "new_vehicle": {
+    "label": "New Vehicle",
+    "gaps": [
+      {
+        "name": "Comprehensive Motor Insurance",
+        "estimatedPremium": "₹800/month",
+        "whyNow": "Third-party insurance is mandatory but doesn't cover damage to your own vehicle. Comprehensive cover protects against theft, accidents, and natural disasters."
+      },
+      {
+        "name": "Personal Accident Cover",
+        "estimatedPremium": "₹150/month",
+        "whyNow": "Road accidents are a leading cause of injury. A personal accident policy covers medical bills and income loss if you're hurt while driving."
+      }
+    ]
+  },
+  "new_home": {
+    "label": "New Home",
+    "gaps": [
+      {
+        "name": "Home Insurance",
+        "estimatedPremium": "₹500/month",
+        "whyNow": "Your home is likely your largest asset. Home insurance protects against fire, floods, theft, and structural damage."
+      },
+      {
+        "name": "Home Loan Protection Plan",
+        "estimatedPremium": "₹400/month",
+        "whyNow": "If you have a home loan, this plan ensures your family isn't burdened with EMIs if something happens to you."
+      },
+      {
+        "name": "Contents Insurance",
+        "estimatedPremium": "₹250/month",
+        "whyNow": "Furnishing a new home is expensive. Contents insurance covers your appliances, electronics, and valuables against damage or theft."
+      }
+    ]
+  }
+}

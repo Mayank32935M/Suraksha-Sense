@@ -1,0 +1,80 @@
+.life-event-screen {
+  padding-top: var(--space-lg);
+}
+
+.life-event-screen__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.life-event-screen__title {
+  text-align: center;
+}
+
+.life-event-screen__subtitle {
+  text-align: center;
+  color: var(--color-text-muted);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.life-event-screen__form {
+  width: 100%;
+}
+
+.life-event-screen__input-wrapper {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: stretch;
+}
+
+.life-event-screen__input {
+  flex: 1;
+  padding: var(--space-md) var(--space-base);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background: var(--color-surface);
+  transition: border-color var(--transition-fast);
+}
+
+.life-event-screen__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(2, 128, 144, 0.12);
+}
+
+.life-event-screen__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.life-event-screen__submit {
+  flex-shrink: 0;
+}
+
+.life-event-screen__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-base);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+}
+
+.life-event-screen__divider::before,
+.life-event-screen__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.life-event-screen__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+}

@@ -1,0 +1,57 @@
+.score-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+}
+
+.score-ring__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.score-ring__bg {
+  stroke: var(--color-border);
+}
+
+.score-ring__arc {
+  transition: stroke-dashoffset 0.8s ease-out, stroke 0.3s ease;
+}
+
+/* Color variants */
+.score-ring--success .score-ring__arc {
+  stroke: var(--color-success);
+}
+
+.score-ring--warning .score-ring__arc {
+  stroke: var(--color-warning);
+}
+
+.score-ring--danger .score-ring__arc {
+  stroke: var(--color-danger);
+}
+
+.score-ring__value {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.score-ring__number {
+  font-size: var(--font-size-score);
+  line-height: var(--line-height-score);
+  font-weight: var(--font-weight-score);
+  color: var(--color-text);
+}
+
+.score-ring__label {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+  margin-top: calc(-1 * var(--space-xs));
+}

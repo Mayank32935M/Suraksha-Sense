@@ -1,0 +1,9 @@
+.privacy-note {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-md) var(--space-base);
+  max-width: 480px;
+  margin: 0 auto;
+}

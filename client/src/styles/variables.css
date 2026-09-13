@@ -1,0 +1,78 @@
+/* Suraksha Sense — Design Tokens */
+/* Source: design.md / Section 10 of master prompt */
+
+:root {
+  /* Colors */
+  --color-primary: #028090;
+  --color-primary-hover: #026d7a;
+  --color-secondary: #00A896;
+  --color-success: #02C39A;
+  --color-warning: #F9A825;
+  --color-danger: #F96167;
+  --color-ai-accent: #6C63FF;
+  --color-background: #F4FAF9;
+  --color-surface: #FFFFFF;
+  --color-text: #0B1F1E;
+  --color-text-muted: #5B7472;
+  --color-border: #DCEAE8;
+
+  /* Spacing scale: 4, 8, 12, 16, 24, 32, 48 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgba(2, 52, 54, 0.08);
+  --shadow-card-hover: 0 4px 16px rgba(2, 52, 54, 0.12);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* Font sizes */
+  --font-size-h1: 28px;
+  --line-height-h1: 34px;
+  --font-weight-h1: 600;
+
+  --font-size-h2: 20px;
+  --line-height-h2: 26px;
+  --font-weight-h2: 600;
+
+  --font-size-h3: 16px;
+  --line-height-h3: 22px;
+  --font-weight-h3: 600;
+
+  --font-size-body: 14px;
+  --line-height-body: 20px;
+  --font-weight-body: 400;
+
+  --font-size-caption: 12px;
+  --line-height-caption: 16px;
+  --font-weight-caption: 400;
+
+  --font-size-score: 48px;
+  --line-height-score: 52px;
+  --font-weight-score: 700;
+
+  --font-size-button: 14px;
+  --line-height-button: 20px;
+  --font-weight-button: 600;
+  --letter-spacing-button: 0.2px;
+
+  /* Focus ring */
+  --focus-ring: 2px solid var(--color-primary);
+  --focus-ring-offset: 2px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}
