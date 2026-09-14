@@ -4,31 +4,41 @@
   padding: var(--space-sm) var(--space-base);
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--color-border);
-  background: var(--color-background);
+  background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-family);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-button);
   line-height: var(--line-height-body);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-smooth);
   user-select: none;
+  box-shadow: var(--shadow-card);
 }
 
 .chip:hover {
   border-color: var(--color-secondary);
   background: rgba(0, 168, 150, 0.06);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.chip:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-card);
 }
 
 .chip--selected {
   background: var(--color-success);
   border-color: var(--color-success);
-  color: var(--color-text);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-card-hover);
 }
 
 .chip--selected:hover {
   background: var(--color-success);
   border-color: var(--color-success);
+  transform: translateY(-2px);
 }
 
 .chip:focus-visible {

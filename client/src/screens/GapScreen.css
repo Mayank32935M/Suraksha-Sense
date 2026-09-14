@@ -14,15 +14,17 @@
   align-items: center;
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-pill);
-  background: rgba(2, 128, 144, 0.1);
+  background: var(--gradient-brand-subtle);
   color: var(--color-primary);
   font-size: var(--font-size-caption);
   font-weight: 600;
+  letter-spacing: 0.3px;
+  border: 1px solid rgba(2, 128, 144, 0.12);
 }
 
 .gap-screen__intro {
   font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
+  line-height: 1.55;
   color: var(--color-text);
   margin-bottom: var(--space-lg);
 }
@@ -32,6 +34,20 @@
   flex-direction: column;
   gap: var(--space-base);
   margin-bottom: var(--space-lg);
+}
+
+/* Stagger card entrance */
+.gap-screen__cards > :nth-child(1) {
+  animation: staggerFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+.gap-screen__cards > :nth-child(2) {
+  animation: staggerFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+.gap-screen__cards > :nth-child(3) {
+  animation: staggerFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+.gap-screen__cards > :nth-child(4) {
+  animation: staggerFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
 }
 
 .gap-screen__disclaimer {

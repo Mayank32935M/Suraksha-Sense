@@ -6,4 +6,7 @@
   padding: var(--space-md) var(--space-base);
   max-width: 480px;
   margin: 0 auto;
+  background: var(--gradient-brand-subtle);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(2, 128, 144, 0.06);
 }

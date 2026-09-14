@@ -5,29 +5,46 @@
 
 const API_BASE = 'http://localhost:3001/api';
 
+/** Default timeout for API calls (20 seconds) */
+const API_TIMEOUT_MS = 20_000;
+
 /**
- * Generic fetch wrapper with error handling.
+ * Generic fetch wrapper with error handling and timeout.
  * @param {string} endpoint - API endpoint (without /api prefix)
  * @param {object} [body] - Request body (POST only)
+ * @param {number} [timeoutMs] - Custom timeout override
  * @returns {Promise<object>} Parsed JSON response
  */
-async function apiCall(endpoint, body = null) {
-  const options = {
-    method: body ? 'POST' : 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
+async function apiCall(endpoint, body = null, timeoutMs = API_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
-  if (body) {
-    options.body = JSON.stringify(body);
+  try {
+    const options = {
+      method: body ? 'POST' : 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+    };
+
+    if (body) {
+      options.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(`${API_BASE}${endpoint}`, options);
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw new Error('Request timed out. Please try again.');
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
   }
-
-  const response = await fetch(`${API_BASE}${endpoint}`, options);
-
-  if (!response.ok) {
-    throw new Error(`API error: ${response.status}`);
-  }
-
-  return response.json();
 }
 
 /**
@@ -59,9 +76,10 @@ export async function getTrustScore() {
 
 /**
  * Request Hindi voiceover via Sarvam API.
+ * Uses a longer timeout since translation + TTS can be slow.
  * @param {string} text - Text to translate/speak (AI-generated, never raw user input)
- * @returns {Promise<{ audioUrl?: string, translatedText?: string, unavailable?: boolean }>}
+ * @returns {Promise<{ audioBase64?: string, translatedText?: string, unavailable?: boolean }>}
  */
 export async function getVoiceover(text) {
-  return apiCall('/voiceover', { text, languageCode: 'hi-IN' });
+  return apiCall('/voiceover', { text, languageCode: 'hi-IN' }, 30_000);
 }

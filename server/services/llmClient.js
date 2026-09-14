@@ -9,8 +9,11 @@ dotenv.config();
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
+/** Timeout for Gemini API calls (15 seconds) */
+const API_TIMEOUT_MS = 15_000;
+
 /**
- * Make a raw Gemini API call.
+ * Make a raw Gemini API call with timeout.
  * @param {string} prompt - The prompt to send
  * @returns {Promise<string>} Raw text response from Gemini
  */
@@ -19,32 +22,64 @@ async function callGemini(prompt) {
     throw new Error('GEMINI_API_KEY not configured');
   }
 
-  const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: 0.1,
-        maxOutputTokens: 1024,
-        responseMimeType: 'application/json',
-      },
-    }),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
 
-  if (!response.ok) {
-    const errText = await response.text();
-    throw new Error(`Gemini API error ${response.status}: ${errText}`);
+  try {
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.1,
+          maxOutputTokens: 1024,
+          responseMimeType: 'application/json',
+        },
+      }),
+    });
+
+    if (response.status === 429) {
+      throw new Error('Gemini API rate limit exceeded. Please try again in a moment.');
+    }
+
+    if (!response.ok) {
+      throw new Error(`Gemini API error ${response.status}`);
+    }
+
+    const data = await response.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!text) {
+      throw new Error('Empty response from Gemini');
+    }
+
+    return text;
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw new Error('Gemini API request timed out');
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+/**
+ * Safely parse JSON from Gemini, stripping markdown fences if present.
+ * @param {string} raw - Raw text from Gemini
+ * @returns {object} Parsed JSON object
+ */
+function safeParseJSON(raw) {
+  let cleaned = raw.trim();
+
+  // Strip markdown code fences (```json ... ``` or ``` ... ```)
+  if (cleaned.startsWith('```')) {
+    cleaned = cleaned.replace(/^```(?:json)?\s*\n?/, '').replace(/\n?```\s*$/, '');
   }
 
-  const data = await response.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-  if (!text) {
-    throw new Error('Empty response from Gemini');
-  }
-
-  return text;
+  return JSON.parse(cleaned);
 }
 
 /**
@@ -79,7 +114,7 @@ User message: "${message}"`;
   const raw = await callGemini(prompt);
 
   try {
-    const parsed = JSON.parse(raw);
+    const parsed = safeParseJSON(raw);
     const validTypes = ['wedding', 'new_baby', 'new_vehicle', 'new_home', 'none'];
 
     if (parsed.eventType && validTypes.includes(parsed.eventType)) {
@@ -129,7 +164,7 @@ Return ONLY a JSON object with this exact structure:
 }`;
 
   const raw = await callGemini(prompt);
-  return JSON.parse(raw);
+  return safeParseJSON(raw);
 }
 
 /**
@@ -176,5 +211,5 @@ Return ONLY a JSON object with this exact structure:
 }`;
 
   const raw = await callGemini(prompt);
-  return JSON.parse(raw);
+  return safeParseJSON(raw);
 }

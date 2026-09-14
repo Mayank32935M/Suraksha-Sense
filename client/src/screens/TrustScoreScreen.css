@@ -14,10 +14,12 @@
   align-items: center;
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-pill);
-  background: rgba(108, 99, 255, 0.1);
-  color: var(--color-ai-accent);
+  background: var(--gradient-ai);
+  color: #FFFFFF;
   font-size: var(--font-size-caption);
   font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: var(--shadow-glow-ai);
 }
 
 .trust-screen__score-section {
@@ -26,12 +28,15 @@
   align-items: center;
   gap: var(--space-sm);
   margin-bottom: var(--space-xl);
+  animation: staggerFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
 }
 
 .trust-screen__score-label {
   font-size: var(--font-size-body);
   font-weight: 600;
   color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .trust-screen__flags {
@@ -43,6 +48,17 @@
 
 .trust-screen__flags-title {
   margin-bottom: var(--space-xs);
+}
+
+/* Stagger flag entrance */
+.trust-screen__flags > .flag-card:nth-child(2) {
+  animation: staggerFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s both;
+}
+.trust-screen__flags > .flag-card:nth-child(3) {
+  animation: staggerFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.25s both;
+}
+.trust-screen__flags > .flag-card:nth-child(4) {
+  animation: staggerFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.35s both;
 }
 
 .trust-screen__voice-section {
@@ -59,10 +75,13 @@
   color: var(--color-text-muted);
   text-align: center;
   padding: var(--space-md) var(--space-base);
-  background: var(--color-background);
-  border-radius: var(--radius-card);
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   max-width: 100%;
+  animation: staggerFadeIn 0.4s ease both;
 }
 
 .trust-screen__disclaimer {

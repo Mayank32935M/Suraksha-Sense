@@ -95,21 +95,30 @@ export default function TrustScoreScreen({ onBack }) {
           setVoiceHindiText(result.translatedText)
         }
 
-        const audioBytes = atob(result.audioBase64)
-        const arrayBuffer = new ArrayBuffer(audioBytes.length)
-        const uint8Array = new Uint8Array(arrayBuffer)
-        for (let i = 0; i < audioBytes.length; i++) {
-          uint8Array[i] = audioBytes.charCodeAt(i)
-        }
+        try {
+          const audioBytes = atob(result.audioBase64)
+          const arrayBuffer = new ArrayBuffer(audioBytes.length)
+          const uint8Array = new Uint8Array(arrayBuffer)
+          for (let i = 0; i < audioBytes.length; i++) {
+            uint8Array[i] = audioBytes.charCodeAt(i)
+          }
 
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)()
-        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
-        const source = audioContext.createBufferSource()
-        source.buffer = audioBuffer
-        source.connect(audioContext.destination)
-        source.onended = () => setVoiceStatus('idle')
-        source.start()
-        setVoiceStatus('playing')
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+          const audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
+          const source = audioContext.createBufferSource()
+          source.buffer = audioBuffer
+          source.connect(audioContext.destination)
+          source.onended = () => setVoiceStatus('idle')
+          source.start()
+          setVoiceStatus('playing')
+        } catch (audioErr) {
+          // Audio decode/playback failed — still show translated text
+          console.error('Audio playback failed')
+          if (result.translatedText) {
+            setVoiceHindiText(result.translatedText)
+          }
+          setVoiceStatus('error')
+        }
       } else {
         setVoiceStatus('error')
       }

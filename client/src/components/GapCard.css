@@ -1,14 +1,18 @@
 .gap-card {
-  background: var(--color-surface);
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   padding: var(--space-lg);
   box-shadow: var(--shadow-card);
-  transition: box-shadow var(--transition-fast);
+  transition: all var(--transition-smooth);
 }
 
 .gap-card:hover {
   box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+  border-color: rgba(2, 128, 144, 0.2);
 }
 
 .gap-card__header {
@@ -20,14 +24,19 @@
 
 .gap-card__icon {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: rgba(2, 128, 144, 0.1);
+  background: var(--gradient-brand-subtle);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.gap-card:hover .gap-card__icon {
+  transform: scale(1.08);
 }
 
 .gap-card__info {
@@ -51,7 +60,7 @@
 
 .gap-card__reason {
   font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
+  line-height: 1.55;
   color: var(--color-text-muted);
   margin-bottom: var(--space-base);
 }
@@ -59,6 +68,7 @@
 .gap-card__action {
   display: inline-flex;
   align-items: center;
+  gap: var(--space-xs);
   background: none;
   border: none;
   color: var(--color-primary);
@@ -67,11 +77,12 @@
   font-weight: var(--font-weight-button);
   cursor: pointer;
   padding: var(--space-xs) 0;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .gap-card__action:hover {
   color: var(--color-primary-hover);
+  gap: var(--space-sm);
 }
 
 .gap-card__action:focus-visible {

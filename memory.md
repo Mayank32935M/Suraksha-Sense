@@ -1,7 +1,7 @@
 # Project Memory
 
 ## Current Status
-Phase 7 — Sarvam Integration completed. All routes and features implemented.
+Phase 11 — Final Readiness completed. All phases (0–11) are done.
 
 ## Completed
 - Phase 0: Vite + React client scaffolded, Express server created, all 6 docs, .gitignore, .env.example
@@ -12,24 +12,25 @@ Phase 7 — Sarvam Integration completed. All routes and features implemented.
 - Phase 5: AI gap rendering with conversational phrasing, name/premium validation against dataset
 - Phase 6: samplePolicy.js + FALLBACK_SCORE_RESULT, trust-score route, TrustScoreScreen wired to real API
 - Phase 7: sarvamClient.js (translate + TTS), voiceover route, VoiceButton wired to real API with audio playback
+- Phase 8: Error hardening — body size limits, API timeouts (client + server), rate limit handling, global error handler, malformed JSON parsing, audio playback error catching, VoiceButton retry on error, 404 catch-all
+- Phase 9: Demo polish — gradient brand text, radial background glow, glassmorphism cards, staggered card entrance animations, lift-on-hover micro-interactions, AI badge gradient with glow, ScoreRing arc animation, improved button shadows, shimmer loading animation, upgraded favicon
+- Phase 10: End-to-end testing — all 3 screens verified via automated browser test (0 console errors), health endpoint verified, 404 handler verified, fallback behavior confirmed when API keys are missing
+- Phase 11: Final readiness — .gitignore verified, README has complete run instructions, memory.md updated
 
 ## Current Phase
-Phase 8 (Error Hardening)
+Complete — all 12 phases finished
 
 ## Current File Being Worked On
-All files implemented; entering hardening/polish
+None — project is complete
 
 ## Last Completed Task
-Wired VoiceButton to Sarvam voiceover API with base64 audio playback and Hindi text fallback
+Phase 11: Final readiness check, memory.md update
 
 ## Next Task
-Phase 8: Error hardening — test all failure paths
-Phase 9: Demo polish
-Phase 10: Full end-to-end testing
-Phase 11: Final readiness check
+None — ready for hackathon demo
 
 ## Known Issues
-None — all 3 screens render correctly, all 4 API routes are mounted and functional
+None — all 3 screens render correctly, all 4 API routes are mounted and functional, all fallbacks verified
 
 ## Important Decisions
 - Plain JavaScript with JSDoc, not TypeScript, to minimize build friction
@@ -42,6 +43,9 @@ None — all 3 screens render correctly, all 4 API routes are mounted and functi
 - Trust score uses FALLBACK_SCORE_RESULT when API/validation fails
 - Gap recommendations fall back to raw dataset when AI rephrasing fails
 - Sarvam voiceover degrades gracefully: audio → translated text → "unavailable" message
+- AbortController timeouts on all HTTP calls (server: 15s Gemini, client: 20s default / 30s voiceover)
+- VoiceButton allows retry after error (not permanently disabled)
+- Express body size limited to 10kb, global error handler never leaks stack traces
 
 ## Do Not Change
 - The gap-mapping dataset values in Section 11

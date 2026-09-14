@@ -17,6 +17,7 @@
   color: var(--color-text-muted);
   max-width: 420px;
   margin: 0 auto;
+  line-height: 1.55;
 }
 
 .life-event-screen__form {
@@ -39,13 +40,14 @@
   line-height: var(--line-height-body);
   color: var(--color-text);
   background: var(--color-surface);
-  transition: border-color var(--transition-fast);
+  transition: all var(--transition-smooth);
+  box-shadow: var(--shadow-card);
 }
 
 .life-event-screen__input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(2, 128, 144, 0.12);
+  box-shadow: 0 0 0 3px rgba(2, 128, 144, 0.12), var(--shadow-card-hover);
 }
 
 .life-event-screen__input::placeholder {
@@ -62,6 +64,8 @@
   gap: var(--space-base);
   color: var(--color-text-muted);
   font-size: var(--font-size-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .life-event-screen__divider::before,
@@ -69,7 +73,7 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--color-border);
+  background: linear-gradient(to right, transparent, var(--color-border), transparent);
 }
 
 .life-event-screen__chips {
@@ -78,3 +82,9 @@
   gap: var(--space-sm);
   justify-content: center;
 }
+
+/* Stagger chip entrance */
+.life-event-screen__chips .chip:nth-child(1) { animation-delay: 0.05s; }
+.life-event-screen__chips .chip:nth-child(2) { animation-delay: 0.1s; }
+.life-event-screen__chips .chip:nth-child(3) { animation-delay: 0.15s; }
+.life-event-screen__chips .chip:nth-child(4) { animation-delay: 0.2s; }
